@@ -1,10 +1,9 @@
 
- //get timer to work
- var timeLeft = 30
- var elem = document.getElementById('countdown-timer');
+var timeLeft = 30
+ var elem = document.getElementById('#countdown-timer');
  var timerId = setInterval(countdown, 1000);
  function countdown() {
-    if (elem == -1) {
+    if (timeLeft == -1) {
       clearTimeout(timerId);
       doSomething();
     } else {
@@ -13,13 +12,22 @@
     }
   }
 
-  
-  
 
- //make questions work, and switch pages
 
- //ensure timer loses time with every wrong answer
 
- //get this shit to work.
 
- 
+
+
+
+
+
+    //make questions work, and switch pages
+
+    //ensure timer loses time with every wrong answer
+
+    //get this shit to work.
+
+
+
+//  //get timer to work
+
