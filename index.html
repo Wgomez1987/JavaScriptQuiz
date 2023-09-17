@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./Assets/css/style.css">
 </head>
+
 <body>
     <nav>
         <button id="view-high-scores">View Highscores</button>
         <p id="countdown-timer">Timer: 30</p>
     </nav>
-    <main>
+    <main id="main">
         <section>
             <h1>Start Page</h1>
             <button id="start-game">Start Game</button>
         </section>
 
-        
+
         <section class="questions">
             <div id="question-container">
             </div>
             <button id="next-question">Next Question</button>
         </section>
 
+        <section>Current Score <span id="final-score"></span></section>
+
+
         <section>
             <h2>Thanks For Playing!</h2>
             <button id="play-again" class="play-again">Play Again?</button>
+
         </section>
+
     </main>
+    <div>
+        <section id="highscores">
+            <button id="save-score">Save Score</button>
+            <h3>High Score Table</h3>
+            <table id="hs-table"></table>
+            <button id="goback">Go Back!</button>
+        </section>
+    </div>
 
     <script src="./Assets/js/script.js"></script>
 </body>
+
 </html>

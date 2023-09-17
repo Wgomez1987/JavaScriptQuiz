@@ -1,15 +1,19 @@
-
-
 var startButton = document.getElementById('start-game');
 var timerElement = document.getElementById('countdown-timer');
 var questionContainer = document.getElementById('question-container');
 var nextQuestionButton = document.getElementById('next-question');
-var playAgainButton = document.getElementById('play-again')
-
-
+var playAgainButton = document.getElementById('play-again');
+var finalScore = document.getElementById('final-score');
+var hsTable = document.getElementById('hs-table');
+var saveButton = document.getElementById('save-score');
+var hsButton = document.getElementById('view-high-scores');
+var goBackButton = document.getElementById('goback');
 var timeLeft = 30;
 var currentQuestion = 0; 
 var timerId;
+var currentScore = 0
+var allHighScores = []
+
 
 
 var questions = [
@@ -90,13 +94,18 @@ function showNextQuestion() {
     } else {
         questionContainer.innerHTML = "All questions have been asked.";
         nextQuestionButton.style.display = 'none'; 
+        finalScore.textContent = currentScore;
+        allHighScores.push(currentScore);
+        console.log(allHighScores)
     }
 }
 
 
 startButton.addEventListener('click', function () {
     startCountdown(); 
-    startButton.style.display = 'none'; 
+    currentScore = 0
+    finalScore.textContent = currentScore;
+    startButton.style.display = 'hidden'; 
     showNextQuestion(); 
 });
 
@@ -115,6 +124,8 @@ nextQuestionButton.addEventListener('click', function () {
 
     if (userChoice === correctAnswer) {
         alert('Correct!');
+        currentScore += 10
+        
     } else {
         
         timeLeft -= 5;
@@ -122,6 +133,8 @@ nextQuestionButton.addEventListener('click', function () {
             timeLeft = 0;
         }
         alert('Incorrect. 5 seconds deducted!');
+        currentScore -= 10
+        
     }
 
     showNextQuestion(); 
@@ -137,7 +150,50 @@ playAgainButton.addEventListener('click', function () {
     nextQuestionButton.style.display = 'block'; 
     timerElement.textContent = 'Timer: 30';
     questionContainer.innerHTML = ''; 
+    showNextQuestion();
+    
+});
+
+function storeScore() {
+    localStorage.setItem('score', JSON.stringify(allHighScores))
+}
+
+function init() {
+    var storedScores = JSON.parse(localStorage.getItem('score'))
+    allHighScores = storedScores
+}
+
+function parseHs() {
+hsTable.innerHTML = "";
+for (var i = 0; i < allHighScores.length; i++) {
+    var score = allHighScores[i];
+    var newRow = document.createElement("tr")
+    var liScore = document.createElement("td");
+    liScore.textContent = score;
+    newRow.append(liScore);
+    hsTable.appendChild(newRow);
+};
+};
+
+saveButton.addEventListener('click', function () {
+    storeScore();
+})
+
+hsButton.addEventListener('click', function () {
+    parseHs();
+    document.querySelector('#main').style.display = "none";
+    document.querySelector('#highscores').style.display = "contents";
 
     
-    showNextQuestion();
-});
+})
+
+goBackButton.addEventListener('click', function () {
+    document.querySelector('#main').style.display = "flex";
+    document.querySelector('#highscores').style.display = "none";
+    
+})
+
+
+
+
+
